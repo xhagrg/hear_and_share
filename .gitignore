@@ -14,6 +14,10 @@
 !/tmp/.keep
 /config/*.yml
 !/config/*.example.yml
+/shared/
+/vendor/dist/
+/vendor/node_modules/
+/vendor/typings/
 
 # Ignore Byebug command history file.
 .byebug_history
