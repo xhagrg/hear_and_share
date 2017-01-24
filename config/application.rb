@@ -18,6 +18,16 @@ Bundler.require(*Rails.groups)
 
 module HearAndShare
   class Application < Rails::Application
+    %W(lib).each do |dir|
+      config.autoload_paths += %W(#{config.root}/#{dir})
+    end
+
+    config.active_job.queue_adapter = :sidekiq
+
+    # config.assets.paths << Rails.root.join('vendor', 'node_modules', 'loaders.css')
+    # config.assets.paths << Rails.root.join('vendor', 'node_modules', 'mapbox-gl')
+    # config.assets.paths << Rails.root.join('vendor', 'node_modules', 'chart.js')
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
