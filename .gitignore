@@ -19,6 +19,9 @@
 /node_modules/
 /vendor/node_modules/
 /vendor/typings/
+/.vscode/
+/public/assets/
+/vendor/webpack-assets.json
 
 # Ignore Byebug command history file.
 .byebug_history
