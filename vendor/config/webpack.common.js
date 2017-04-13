@@ -18,12 +18,7 @@ module.exports = {
     app: './app/main.ts'
   },
   resolve: {
-    extensions: ['', '.js', '.ts', '.css'],
-    alias: {
-      // use proper file (needed to change file to export punycode).
-      'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl-dev.js'),
-      'mapbox-gl-geocoder': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl-geocoder.js')
-    }
+    extensions: ['', '.js', '.ts', '.css']
   },
   module: {
     loaders: [
