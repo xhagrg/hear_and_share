@@ -16,6 +16,7 @@
 !/config/*.example.yml
 /shared/
 /vendor/dist/
+/node_modules/
 /vendor/node_modules/
 /vendor/typings/
 
