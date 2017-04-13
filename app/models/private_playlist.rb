@@ -1,0 +1,2 @@
+class PrivatePlaylist < Playlist
+end

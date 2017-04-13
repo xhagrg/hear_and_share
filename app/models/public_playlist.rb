@@ -1,0 +1,2 @@
+class PublicPlaylist < Playlist
+end
