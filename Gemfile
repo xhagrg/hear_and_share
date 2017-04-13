@@ -27,9 +27,15 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'mongoid'
 
+gem 'devise'
+
+gem 'devise-bootstrapped'
+
 gem 'redis'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+
+gem 'httparty'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
