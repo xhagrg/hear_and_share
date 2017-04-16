@@ -12,6 +12,8 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <div id='current_user_id' hidden data-current-user-id="<%= current_user&.id&.to_s %>">
+    </div>
     <%= yield %>
   </body>
   <% ['common', 'vendor', 'polyfills', 'app'].each do |js_libs| %>
