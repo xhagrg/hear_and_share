@@ -37,6 +37,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'httparty'
 
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
