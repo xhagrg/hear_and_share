@@ -1,8 +1,9 @@
 class Api::V1::InvitationsController < Api::V1::ApiBaseController
   def index
     @invitations = Invitation.where(
-      status: Invitation::Pending, user_id: params[:current_user_id]
+      status: Invitation::PENDING, sender_id: params[:current_user_id]
     )
+    render json: @invitations
   end
 
   def create
@@ -11,6 +12,11 @@ class Api::V1::InvitationsController < Api::V1::ApiBaseController
       @invitation = Invitation.new(sender_id: params[:current_user_id], receiver_id: params[:user_id])
       @invitation.save
     end
+    render json: @invitation
+  end
+
+  def show
+    render json: invitation    
   end
 
   def destroy
@@ -21,6 +27,7 @@ class Api::V1::InvitationsController < Api::V1::ApiBaseController
     if(params[:accept])
       invitation.accept
     end
+    render json: invitation
   end
 
   private 

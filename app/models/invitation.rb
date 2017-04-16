@@ -9,7 +9,9 @@ class Invitation
     ACCEPTED
   ]
   
-  field :status, type: String
+  field :status, type: String, default: PENDING
+
+  field :message, type: String, default: 'Lets listen to some music together.'
   belongs_to :sender, inverse_of: :sent_invitations, class_name: 'User'
   belongs_to :receiver, inverse_of: :received_invitations, class_name: 'User'
   
