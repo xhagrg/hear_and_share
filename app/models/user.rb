@@ -65,10 +65,14 @@ class User
     @login || self.nick_name || self.email
   end
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      self.search(query).first
+      self.search(login).first
     else
       super
     end
