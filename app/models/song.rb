@@ -11,7 +11,7 @@ class Song
   field :url,  type: String
   # field :track_no, type: Integer
   field :info, type: String
-  field :play_count, type: String, default: 0
+  field :play_count, type: Integer, default: 0
   field :thumbnail_url, type: String
 
   has_and_belongs_to_many :playlist
