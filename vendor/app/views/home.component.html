@@ -1,1 +1,27 @@
-<div>test</div>
+<div class='container'>
+  <div class='row'>
+    <div class="dropdown col-md-12">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{selectedComponent}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+        <li *ngFor="let component of componentList">
+          <a (click)="updateComponent(component)">
+            {{component}}
+            <span class='badge' *ngIf='component == "Invitations"'>{{invitationCount}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='component-holder col-md-12'>
+      <invitation-selector *ngIf="selectedComponent=='Invitations'"></invitation-selector>
+      <playlist-list-selector *ngIf="selectedComponent=='Playlists'"></playlist-list-selector>
+      <user-list-selector *ngIf="selectedComponent=='Users'"></user-list-selector>
+      <friend-list-selector *ngIf="selectedComponent=='Friends'"></friend-list-selector>
+    </div>
+  </div>
+</div>
+<br>
