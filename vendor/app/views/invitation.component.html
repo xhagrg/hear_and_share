@@ -1,0 +1,25 @@
+<div class='invitations-holder'>
+  <div class='invitation'>
+    <div class='panel panel-default'>
+      <div class='panel panel-heading'>
+        <h4>
+          Invitations
+        </h4>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item" *ngFor="let invitation of invitations" id="invitation-{{invitation.id}}">
+          <div class='row'>
+            <div class='col-md-12'>
+              {{invitation.sender_name}} sent you a request
+              <button class='glyphicon glyphicon-ok btn btn-success pull-right' (click)="update(invitation, 'accept')"></button>
+              <button class='glyphicon glyphicon-remove btn btn-danger pull-right' (click)="update(invitation, 'reject')"></button>
+            </div>
+          </div>
+        </a>
+        <a class="list-group-item" *ngIf="invitations?.length <= 0">
+          No pending invitations
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
