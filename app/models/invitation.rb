@@ -4,9 +4,11 @@ class Invitation
 
   PENDING = 'pending'
   ACCEPTED = 'accepted'
+  REJECTED = 'rejected'
   STATUSES = [
     PENDING,
-    ACCEPTED
+    ACCEPTED,
+    REJECTED
   ]
   
   field :status, type: String, default: PENDING
@@ -30,7 +32,16 @@ class Invitation
       self.status = Invitation::ACCEPTED
       self.save
       self.sender.friends << self.receiver
+      self.receiver.friends << self.sender
+      self.receiver.save
       self.sender.save
+    end
+  end
+
+  def reject
+    if(self.status == Invitation::PENDING)
+      self.status = Invitation::REJECTED
+      self.save
     end
   end
 end
