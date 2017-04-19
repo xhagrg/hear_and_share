@@ -13,17 +13,30 @@ export class InvitationService {
     this.data = {};
   }
 
-  events(year = null, month = null): Promise<any> {
-    let url = this.url;
-    if (year && month) {
-      url = `${url}?year=${year}&month=${month}`;
-    }
-    let return_data = this.data[url];
-    if(!return_data) {
-      this.data[url] = this.http.get(url)
-                         .toPromise()
-                         .then(response => response.json());
-    }
-    return this.data[url];
+  invitations(current_user_id): Promise<any> {
+    return this.http.get(`${this.url}?current_user_id=${current_user_id}`)
+      .toPromise()
+      .then(response => response.json());
   };
+
+  invitation(invitation_id): Promise<any> {
+    let url = `${this.url}/${invitation_id}`;
+    return this.http.get(url).toPromise().then(response => response.json());
+  }
+
+  update(invitation_id, current_user_id, user_id, status): Promise<any> {
+    let url = `${this.url}/${invitation_id}`;
+    return this.http.put(url, { 
+      status: status, 
+      current_user_id: current_user_id
+    }).toPromise().then(response => response.json());
+  }
+
+  create(current_user_id, user_id): Promise<any> {
+    let url = `${this.url}`;
+    return this.http.post(url, { 
+      user_id: user_id, 
+      current_user_id: current_user_id
+    }).toPromise().then(response => response.json());   
+  }
 }
