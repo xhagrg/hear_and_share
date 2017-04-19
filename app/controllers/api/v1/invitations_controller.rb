@@ -1,7 +1,7 @@
 class Api::V1::InvitationsController < Api::V1::ApiBaseController
   def index
     @invitations = Invitation.where(
-      status: Invitation::PENDING, sender_id: params[:current_user_id]
+      status: Invitation::PENDING, receiver_id: params[:current_user_id]
     )
     render json: @invitations
   end
@@ -24,8 +24,10 @@ class Api::V1::InvitationsController < Api::V1::ApiBaseController
   end
 
   def update
-    if(params[:accept])
+    if(params[:status] == 'accept')
       invitation.accept
+    elsif(params[:status] == 'reject')
+      invitaion.reject
     end
     render json: invitation
   end
@@ -36,7 +38,7 @@ class Api::V1::InvitationsController < Api::V1::ApiBaseController
     @invitation ||= Invitation.where(
       id: params[:id], 
       receiver_id: params[:current_user_id], 
-      status: Invitation::Pending
+      status: Invitation::PENDING
     ).last    
   end
 
