@@ -13,17 +13,19 @@ export class UserService {
     this.data = {};
   }
 
-  events(year = null, month = null): Promise<any> {
-    let url = this.url;
-    if (year && month) {
-      url = `${url}?year=${year}&month=${month}`;
-    }
-    let return_data = this.data[url];
-    if(!return_data) {
-      this.data[url] = this.http.get(url)
-                         .toPromise()
-                         .then(response => response.json());
-    }
-    return this.data[url];
+  users(current_user_id): Promise<any> {
+    return this.http.get(`${this.url}?current_user_id=${current_user_id}`)
+      .toPromise()
+      .then(response => response.json());
   };
+
+  user(user_id, current_user_id): Promise<any> {
+    let url = `${this.url}/${user_id}?current_user_id=${current_user_id}`;
+    return this.http.get(url).toPromise().then(response => response.json());
+  }
+
+  logOut(): Promise<any> {
+    let temp_url = `${window.location.protocol}//${window.location.host}:${window.location.port}/users/sign_out`;
+    return this.http.delete(temp_url).toPromise().then(response => response.json());    
+  }
 }
