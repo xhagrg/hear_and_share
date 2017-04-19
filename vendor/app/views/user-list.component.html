@@ -1,0 +1,45 @@
+<div class='users-holder'>
+  <div class='user'>
+    <div class='panel panel-default'>
+      <div class="panel-heading">
+        <h4>
+          Users
+        </h4>
+      </div>
+      <div class="list-group">
+        <a class="list-group-item" *ngFor="let user of users" id="user-{{user.id}}">
+          <div class='row'>
+            <div class='col-md-12'>
+              <a (click)="updateSelected(user);userModal.open()">
+                {{ user.name }}
+              </a>
+              <button class="btn btn-primary pull-right" *ngIf="!user.is_friend && !user.invitation_present" (click)="addFriend(user)">
+                <i class="glyphicon glyphicon-plus"></i>
+                Add friend
+              </button>
+            </div>
+          </div>
+        </a>
+        <a class="list-group-item" *ngIf="users?.length <= 0">
+          No users :(
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<modal #userModal>
+  <modal-header>
+    <h3>User Details</h3>
+  </modal-header>
+  <modal-content>
+    <strong>Email: </strong>{{selectedUser?.email}}
+    <br>
+    <strong>Name: </strong>{{selectedUser?.name}}
+    <br>
+    <strong>Nick Name: </strong>{{selectedUser?.nick_name}}
+    <br>
+  </modal-content>
+  <modal-footer>
+      <button class="btn btn-primary" (click)="userModal.close()">Close</button>
+  </modal-footer>
+</modal>
