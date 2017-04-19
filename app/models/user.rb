@@ -80,8 +80,8 @@ class User
 
   def self.search(query)
     self.any_of(
-      { nick_name:  /^#{Regexp.escape(query)}$/i }, 
-      { email:  /^#{Regexp.escape(query)}$/i }
+      { nick_name: /^#{Regexp.escape(query)}$/i }, 
+      { email: /^#{Regexp.escape(query)}$/i }
     )
   end
 
