@@ -1,8 +1,19 @@
-<nav class="navbar navbar-inverse nav-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" routerLink="/" scroll-to="welcome" offset="50"><span>MM</span></a>
     </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <i class='glyphicon glyphicon-user'></i>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a rel="nofollow" data-method='delete' href="/users/sign_out">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
     <!--<div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li id='loader'>
@@ -16,11 +27,28 @@
   </div>
 </nav>
 
-<youtube-player
-  [videoId]="id"
-  [height]="500"
-  [width]="720"
-  (ready)="savePlayer($event)"
-  (change)="onStateChange($event)"
-></youtube-player>
+<div class='container'>
+  <youtube-player
+    id="player"
+    [videoId]="id"
+    [height]="height"
+    [width]="width"
+    (ready)="savePlayer($event)"
+    (change)="onStateChange($event)"
+  ></youtube-player>
+  <div class='row' id='player-control'>
+    <div class='col-md-1'>
+      <button class='pull-left glyphicon glyphicon-step-backward btn' (click)="playPrevious()">
+      </button>
+    </div>
+    <div class='col-md-10 thumbnail-holder'>
+      <img src="{{song.thumbnail_url}}" *ngFor="let song of songs" (click)="playSong(song)" [class.current]="isPlaying(song)">
+    </div>
+    <div class='col-md-1'>
+      <button class='pull-right glyphicon glyphicon-step-forward btn' (click)="playNext()">
+      </button>
+    </div>
+  </div>
+</div>
+<br><br>
 <router-outlet></router-outlet>
