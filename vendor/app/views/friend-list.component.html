@@ -1,0 +1,12 @@
+<div class='users-holder'>
+  <div class='user'>
+    <div class="list-group">
+      <a class="list-group-item active">
+        Users
+      </a>
+      <a class="list-group-item" *ngFor="let user of users" id="user-{{user.id}}">
+        {{user.name}}
+      </a>
+    </div>
+  </div>
+</div>
