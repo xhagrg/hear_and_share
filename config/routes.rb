@@ -13,7 +13,17 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :show]
       resources :invitations
-      resources :playlists
+      resources :playlists do
+        member do
+          post :remove_song
+        end
+        collection do
+          post :song_count
+        end
+      end
     end
   end
+
+  get 'playlists/:id', to: 'home#index'
+  get 'playlists/', to: 'home#index'
 end
