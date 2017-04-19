@@ -1,0 +1,74 @@
+<div class='playlist-holder'>
+  <div class='playlist'>
+    <div class='panel panel-default'>
+      <div class="panel-heading">
+        <h4>
+          <span>
+            Playlists
+          </span>
+          
+          <button class="btn btn-primary pull-right" (click)="playlistModal.open()">
+            <i class="glyphicon glyphicon-plus"></i>
+            Add Playlist
+          </button>
+        </h4>
+      </div>
+      <div class="list-group">
+        <div class="list-group-item" *ngFor="let playlist of playlists" id="playlist-{{playlist.id}}">
+          <a [routerLink]="['/playlists', playlist.id]">
+            {{ playlist.name }} 
+            <span *ngIf='current_user_id != playlist.user_id'>
+              ({{playlist.user_name}}'s playlist)
+            </span>
+            <span *ngIf='current_user_id == playlist.user_id'>
+              (Your 
+              <span *ngIf='playlist.type == "PrivatePlaylist"'>
+                Private
+              </span> 
+              playlist)
+            </span>
+            
+          </a>
+          <i class="glyphicon glyphicon-remove pull-right icons remove" (click)="delete(playlist)"  *ngIf="playlist.user_id == current_user_id"></i>
+          <i class="glyphicon glyphicon-pencil pull-right icons edit" (click)="updateEditing(playlist);playlistEditModal.open()"  *ngIf="playlist.user_id == current_user_id"></i>
+        </div>
+        <div class="list-group-item" *ngIf="playlists?.length <= 0">
+          No playlists yet! Please add one.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<modal #playlistModal title="Add Playlist" submitButtonLabel="Add" (onSubmit)="addPlaylist(); playlistModal.close()">
+  <modal-content>
+    <div>
+      <strong>Name</strong>
+      <input type="text" [(ngModel)]="name" name="name" ngControl="name">
+    </div>
+    <br>
+    <div>
+      <strong>Type</strong>
+      <select [(ngModel)]="type" name="type" ngControl="type" (change)="updateType($event.target.value)">
+        <option value="PrivatePlaylist" selected>Private</option>
+        <option value="PublicPlaylist" >Public</option>
+      </select>
+    </div>    
+  </modal-content>
+</modal>
+
+<modal #playlistEditModal title="Edit Playlist" submitButtonLabel="Update" (onSubmit)="update(); playlistEditModal.close()">
+  <modal-content>
+    <div>
+      <strong>Name</strong>
+      <input type="text" [(ngModel)]="name" name="name" ngControl="name" value="{{editingPlaylist?.name}}" (blur)="checkValidity($event)" required>
+    </div>
+    <br/>
+    <div>
+      <strong>Type</strong>
+      <select [(ngModel)]="type" name="type" ngControl="type" (change)="updateType($event.target.value)">
+        <option value="PrivatePlaylist" [selected]="editingPlaylist?.type == 'PrivatePlaylist'">Private</option>
+        <option value="PublicPlaylist" [selected]="editingPlaylist?.type == 'PublicPlaylist'">Public</option>
+      </select>
+    </div>    
+  </modal-content>
+</modal>

@@ -1,0 +1,40 @@
+<div class='container'>
+  <div class='playlist-holder'>
+    <div class='playlist'>
+      <div class='panel panel-default'>
+        <div class='panel panel-heading'>
+          <h4>
+            <a [routerLink]="['/home']">
+              Playlists
+            </a>
+            > {{playlist?.name}} ({{playlist?.user_name}}'s Playlist)
+            <button class="btn btn-primary pull-right" (click)="songModal.open()">
+              <i class="glyphicon glyphicon-plus"></i>
+              Add Song
+            </button>
+          </h4>
+        </div>
+        <div class="list-group">
+          <div class="list-group-item" *ngFor="let song of songs" id="song-{{song.id}}">
+            <img src="{{song.thumbnail_url}}" (click)="playSong(song)">
+            <a (click)="playSong(song)">
+              {{ song.name }}
+            </a>
+            <strong> Played: {{song.play_count}} times</strong>
+            <i class="glyphicon glyphicon-remove pull-right icons remove" (click)="delete(song)"  *ngIf="playlist.user_id == current_user_id"></i>
+          </div>
+          <div class="list-group-item" *ngIf="songs?.length <= 0">
+            No songs yet!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <modal #songModal title="Add song" submitButtonLabel="Add Song" (onSubmit)="addSong(); songModal.close()">
+    <modal-content>
+      <strong>URL</strong>
+      <input type="text" [(ngModel)]="url" name="url" ngControl="url">
+    </modal-content>
+  </modal>
+
+</div>
